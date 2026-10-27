@@ -1,0 +1,100 @@
+import { useState } from 'react';
+import { ArrowRight, Plus, Minus } from 'lucide-react';
+import { Link } from 'wouter';
+
+interface FaqItem {
+  q: string;
+  a: string;
+}
+
+const FAQS: FaqItem[] = [
+  {
+    q: 'What kind of projects does bit3labs build?',
+    a: 'We build custom web applications, 3D interactive websites, bespoke e-commerce platforms, native and cross-platform mobile apps (iOS & Android), and custom ERP & inventory management systems tailored to your business operations.',
+  },
+  {
+    q: 'How does a typical development project begin?',
+    a: 'We kick off with a collaborative technical and architecture discovery workshop covering your business requirements, integrations, UI/UX expectations, and tech stack before defining a phased sprint roadmap.',
+  },
+  {
+    q: 'Can you work alongside our existing in-house team?',
+    a: 'Absolutely. We can operate as an autonomous end-to-end delivery team or embed directly alongside your technical leads and developers to accelerate product velocity.',
+  },
+  {
+    q: 'What are typical project timelines?',
+    a: 'Custom websites, personal portfolios, and 3D showcases typically take 3–6 weeks. Full-scale custom e-commerce storefronts, mobile apps, or enterprise ERP and inventory hubs usually take 6–14 weeks with milestone-based delivery.',
+  },
+  {
+    q: 'Do you provide ongoing support, maintenance, and hosting?',
+    a: 'Yes. We offer continuous SLA-backed maintenance, cloud infrastructure monitoring, database optimization, and active feature expansion after go-live.',
+  },
+];
+
+export function FaqSection() {
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  const toggle = (idx: number) => {
+    setOpenIndex(openIndex === idx ? null : idx);
+  };
+
+  return (
+    <section className="editorial-section faq-section" id="faq">
+      <div className="section-wrap editorial-grid">
+        {/* Left Rail */}
+        <aside className="editorial-rail">
+          <span className="section-kicker">QUESTION</span>
+        </aside>
+
+        {/* Main Column */}
+        <div className="editorial-main">
+          <div className="faq-header-row">
+            <div className="faq-title-wrap">
+              <h2 className="section-title">
+                FREQUENTLY ASKED <span className="red">QUESTIONS</span>
+              </h2>
+              <p className="editorial-lead">
+                Discover all the essential details about our work process. If you have any further questions, feel free to reach out at any time!
+              </p>
+            </div>
+            <Link href="/contact" className="faq-contact-btn">
+              <span>CONTACT US</span>
+              <span className="square-arrow-icon" aria-hidden="true">
+                <ArrowRight size={15} />
+              </span>
+            </Link>
+          </div>
+
+          {/* Accordion */}
+          <div className="faq-accordion-list">
+            {FAQS.map((item, idx) => {
+              const isOpen = openIndex === idx;
+
+              return (
+                <div key={item.q} className={`faq-card ${isOpen ? 'is-open' : ''}`}>
+                  <button
+                    type="button"
+                    className="faq-toggle-btn"
+                    onClick={() => toggle(idx)}
+                    aria-expanded={isOpen}
+                  >
+                    <span className="faq-num">//0{idx + 1}</span>
+                    <span className="faq-question-text">{item.q}</span>
+                    <span className="faq-icon-badge" aria-hidden="true">
+                      {isOpen ? <Minus size={16} /> : <Plus size={16} />}
+                    </span>
+                  </button>
+
+                  {isOpen && (
+                    <div className="faq-body">
+                      <p>{item.a}</p>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
