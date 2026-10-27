@@ -1,6 +1,6 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { Link, useLocation } from 'wouter';
-import { ArrowDown, ArrowRight, ArrowUpRight, Check, Menu, X, Plus, Minus, CalendarDays, Layers3 } from 'lucide-react';
+import { ArrowDown, ArrowRight, ArrowUpRight, Check, Menu, X, Plus, Minus } from 'lucide-react';
 
 type Project = { title: string; type: string; category: string; image: string; tone: string; label: string };
 const projects: Project[] = [
@@ -59,51 +59,42 @@ function ContactPage() {
     const email = String(data.get('email') || '').trim();
     const focus = String(data.get('focus') || '');
     const message = String(data.get('message') || '').trim();
-    if (!name || !email || !focus || !message) { setFormError('Please complete each required field to prepare your inquiry.'); return; }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setFormError('Enter a valid email address so we know how to reach you.'); return; }
+    if (!name || !email || !focus || !message) { setFormError('Please complete each required field.'); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setFormError('Enter a valid email address.'); return; }
     setFormError('');
     setSubmitted(true);
     form.reset();
   };
   return <div className="contact-page">
-    <SiteHeader />
     <main id="contact-top">
-      <section className="contact-hero section-wrap">
-        <div className="contact-kicker"><span className="red-line" /><span className="eyebrow">A good place to begin</span><span className="eyebrow contact-index">bit3labs / Contact</span></div>
-        <div className="contact-hero-content">
-          <h1 className="display">Let’s create<br /><span>together.</span></h1>
-          <div className="contact-intro"><p>Have a website, mobile app, or ERP system in mind? Tell us what you’re working toward. We’ll bring thoughtful questions and a clear next step.</p><span className="eyebrow">New projects · Collaborations · Questions</span></div>
-        </div>
-        <div className="contact-hero-foot"><span className="eyebrow">Custom digital work, built around your business</span><a href="#inquiry">Start a conversation <ArrowDown size={14} /></a></div>
-        <span className="contact-watermark" aria-hidden="true">C</span>
-      </section>
-      <section className="contact-details section-wrap" aria-label="Project information">
-        <div className="contact-detail-intro"><span className="eyebrow">01 / The useful details</span><h2 className="display">A little context<br />goes a long way.</h2><p>Share the challenge, what a better outcome could look like, and anything that helps us understand the shape of the work.</p></div>
-        <div className="contact-detail-list">
-          <article><span className="detail-icon"><Layers3 size={19} /></span><div><span className="eyebrow">What we make</span><h3>Digital, made useful.</h3><p>Custom websites, mobile apps, and ERP systems—designed and developed with your team’s real needs in mind.</p></div></article>
-          <article><span className="detail-icon"><CalendarDays size={19} /></span><div><span className="eyebrow">What happens next</span><h3>A considered first step.</h3><p>We’ll review the details you share and map out a useful conversation about scope, fit, and what comes next.</p></div></article>
-        </div>
-      </section>
-      <section className="contact-inquiry" id="inquiry">
-        <div className="section-wrap inquiry-layout">
-          <div className="inquiry-aside"><span className="eyebrow">02 / Your inquiry</span><h2 className="display">Tell us<br />what’s next.</h2><p>No polished brief needed. A few honest details are enough to start.</p><div className="inquiry-note"><span className="note-marker" /><span className="eyebrow">A note on this preview</span><p>Your message is validated in this browser only. It is not sent or saved.</p></div></div>
-          <div className="contact-form-wrap">
-            {submitted ? <div className="success-panel" role="status" aria-live="polite"><span className="success-icon"><Check /></span><span className="eyebrow">Inquiry prepared</span><h3>Thank you<br />for the context.</h3><p>This preview does not send or save inquiries, so your note has not reached the studio. The form is ready to connect to a submission service.</p><button onClick={() => setSubmitted(false)} className="reset-link">Prepare another inquiry <ArrowRight size={15} /></button></div> :
-            <form className="inquiry-form dedicated-form" onSubmit={handleSubmit} noValidate>
-              <span className="eyebrow">A few starting points</span>
-              <label htmlFor="contact-name"><span className="field-label">Your name <span aria-hidden="true">*</span></span><input id="contact-name" name="name" type="text" placeholder="How should we address you?" autoComplete="name" required /></label>
-              <label htmlFor="contact-email"><span className="field-label">Email address <span aria-hidden="true">*</span></span><input id="contact-email" name="email" type="email" placeholder="you@company.com" autoComplete="email" required /></label>
-              <label htmlFor="contact-focus"><span className="field-label">What are you looking to make? <span aria-hidden="true">*</span></span><select id="contact-focus" name="focus" defaultValue="" required><option value="" disabled>Select a project type</option><option>Custom website</option><option>Mobile app</option><option>ERP system</option><option>Not sure yet</option></select></label>
-              <label htmlFor="contact-message"><span className="field-label">A little about the project <span aria-hidden="true">*</span></span><textarea id="contact-message" name="message" rows={4} placeholder="What are you trying to change, build, or make easier?" required /></label>
-              {formError && <p className="form-error" role="alert">{formError}</p>}
-              <button className="submit-button" type="submit">Prepare your inquiry <ArrowUpRight size={17} /></button>
-              <p className="privacy-note">Preview only. This form checks your details in the browser and does not send or store them.</p>
-            </form>}
+      <section className="contact-hero" aria-labelledby="contact-heading">
+        <div className="contact-kicker"><span className="red-line" aria-hidden="true" /><span className="eyebrow">Contact</span></div>
+        <div className="contact-layout">
+          <aside className="contact-info" aria-label="Project areas">
+            <a href="#contact-form" className="contact-info-row"><span className="contact-info-icon" aria-hidden="true"><ArrowUpRight size={13} /></span><span>Custom websites</span></a>
+            <a href="#contact-form" className="contact-info-row"><span className="contact-info-icon" aria-hidden="true"><ArrowUpRight size={13} /></span><span>Mobile apps</span></a>
+            <a href="#contact-form" className="contact-info-row"><span className="contact-info-icon" aria-hidden="true"><ArrowUpRight size={13} /></span><span>ERP systems</span></a>
+          </aside>
+          <div className="contact-body">
+            <h1 className="display" id="contact-heading">Let’s create<br /><span>together.</span></h1>
+            <div className="contact-form-wrap">
+              {submitted ? <div className="success-panel" role="status" aria-live="polite"><span className="eyebrow">Preview only</span><h2>Message prepared.</h2><p>Nothing was sent or saved. This form still needs to be connected to an inbox.</p><button onClick={() => setSubmitted(false)} className="reset-link">Prepare another message <ArrowRight size={15} /></button></div> :
+              <form className="inquiry-form dedicated-form" id="contact-form" onSubmit={handleSubmit} noValidate aria-describedby="preview-note">
+                <label htmlFor="contact-name"><span className="field-label">Name <span aria-hidden="true">*</span></span><input id="contact-name" name="name" type="text" placeholder="Your name" autoComplete="name" required /></label>
+                <label htmlFor="contact-email"><span className="field-label">Email <span aria-hidden="true">*</span></span><input id="contact-email" name="email" type="email" placeholder="you@example.com" autoComplete="email" required /></label>
+                <label htmlFor="contact-focus"><span className="field-label">Project type <span aria-hidden="true">*</span></span><select id="contact-focus" name="focus" defaultValue="" required><option value="" disabled>Select a project type</option><option>Custom website</option><option>Mobile app</option><option>ERP system</option><option>Not sure yet</option></select></label>
+                <label htmlFor="contact-message"><span className="field-label">Message <span aria-hidden="true">*</span></span><textarea id="contact-message" name="message" rows={3} placeholder="Tell us what you would like to create." required /></label>
+                {formError && <p className="form-error" role="alert">{formError}</p>}
+                <button className="submit-button" type="submit">Prepare message <ArrowUpRight size={16} /></button>
+                <p className="privacy-note" id="preview-note">Preview only. Messages are not sent or stored.</p>
+              </form>}
+            </div>
           </div>
         </div>
+        <div className="contact-watermark" aria-hidden="true">bit3labs</div>
       </section>
     </main>
-    <footer className="contact-footer"><div className="footer-bottom section-wrap"><Link href="/" className="wordmark footer-mark">bit3labs<span className="period">.</span></Link><p>Independent digital studio<br />Working everywhere.</p><div className="footer-links"><a href="/#about">About</a><a href="/#work">Work</a><a href="/#services">Services</a><Link href="/contact">Contact</Link></div><span className="eyebrow">© {new Date().getFullYear()} bit3labs</span><a href="#contact-top" className="back-top">Back to top <ArrowUpRight size={14} /></a></div></footer>
+    <footer className="contact-footer"><div className="contact-footer-inner section-wrap"><Link href="/" className="wordmark footer-mark">bit3labs<span className="period">.</span></Link><nav className="contact-footer-links" aria-label="Footer navigation"><a href="/#about">About</a><a href="/#work">Work</a><a href="/#services">Services</a><Link href="/contact">Contact</Link></nav><span className="eyebrow">© {new Date().getFullYear()} bit3labs</span></div></footer>
   </div>;
 }
 
