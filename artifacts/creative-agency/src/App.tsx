@@ -52,7 +52,7 @@ function App() {
 
   return <main>
     <header className="topbar">
-      <a href="#top" className="wordmark" aria-label="Creative home">CREATIVE<span className="period">.</span></a>
+      <a href="#top" className="wordmark" aria-label="bit3labs home">bit3labs<span className="period">.</span></a>
       <nav className="desktop-nav" aria-label="Main navigation">
         <a href="#about">About</a><a href="#work">Work</a><a href="#services">Services</a><a href="#faq">FAQ</a>
       </nav>
@@ -138,7 +138,7 @@ function App() {
           </form>}
         </div>
       </div>
-       <div className="footer-bottom section-wrap"><a href="#top" className="wordmark footer-mark">CREATIVE<span className="period">.</span></a><p>Independent digital studio<br />Working everywhere.</p><div className="footer-links"><a href="#about">About</a><a href="#work">Work</a><a href="#services">Services</a><a href="#faq">FAQ</a></div><span className="eyebrow">© {new Date().getFullYear()} Creative Studio</span><a href="#top" className="back-top">Back to top <ArrowUpRight size={14} /></a></div>
+       <div className="footer-bottom section-wrap"><a href="#top" className="wordmark footer-mark">bit3labs<span className="period">.</span></a><p>Independent digital studio<br />Working everywhere.</p><div className="footer-links"><a href="#about">About</a><a href="#work">Work</a><a href="#services">Services</a><a href="#faq">FAQ</a></div><span className="eyebrow">© {new Date().getFullYear()} bit3labs</span><a href="#top" className="back-top">Back to top <ArrowUpRight size={14} /></a></div>
     </footer>
   </main>;
 }
