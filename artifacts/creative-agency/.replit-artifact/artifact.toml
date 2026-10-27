@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Creative Studio"
+description = "A premium digital studio website presenting custom websites, mobile apps, and ERP systems through a strong portfolio, clear services, client proof, and a conversion-focused contact experience."
+version = "1.0.0"
+id = "artifacts/creative-agency"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18171
+
+[services.development]
+run = "pnpm --filter @workspace/creative-agency run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/creative-agency", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/creative-agency/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18171"
+BASE_PATH = "/"
