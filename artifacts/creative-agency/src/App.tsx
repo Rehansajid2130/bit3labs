@@ -1,5 +1,6 @@
-import { useState, type FormEvent } from 'react';
-import { ArrowDown, ArrowRight, ArrowUpRight, Check, Menu, X, Plus, Minus } from 'lucide-react';
+import { useEffect, useState, type FormEvent } from 'react';
+import { Link, useLocation } from 'wouter';
+import { ArrowDown, ArrowRight, ArrowUpRight, Check, Menu, X, Plus, Minus, CalendarDays, Layers3 } from 'lucide-react';
 
 type Project = { title: string; type: string; category: string; image: string; tone: string; label: string };
 const projects: Project[] = [
@@ -20,23 +21,114 @@ const categories = ['All work', 'Websites', 'Mobile apps', 'ERP systems'];
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   return <article className={`project-card project-${index}`}>
-    <a className={`project-visual ${project.tone}`} href="#contact" aria-label={`Discuss a project like ${project.title}`}>
+    <Link className={`project-visual ${project.tone}`} href="/contact" aria-label={`Discuss a project like ${project.title}`}>
       <img src={`https://images.pexels.com/photos/${project.image}/pexels-photo-${project.image}.jpeg?auto=compress&cs=tinysrgb&w=1200`} alt={`${project.title} project visual`} loading="lazy" />
       <span className="project-stamp">{String(index + 1).padStart(2, '0')}</span>
       <span className="project-open"><ArrowUpRight size={21} /></span>
-    </a>
+    </Link>
     <div className="project-info"><div><h3>{project.title}</h3><p>{project.label}</p></div><span>{project.type}</span></div>
   </article>;
 }
 
+function SiteHeader() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const closeMenu = () => setMenuOpen(false);
+  return <header className="topbar">
+    <Link href="/" className="wordmark" aria-label="bit3labs home">bit3labs<span className="period">.</span></Link>
+    <nav className="desktop-nav" aria-label="Main navigation">
+      <a href="/#about">About</a><a href="/#work">Work</a><a href="/#services">Services</a><a href="/#faq">FAQ</a><Link href="/contact">Contact</Link>
+    </nav>
+    <Link className="nav-cta" href="/contact">Start a project <ArrowUpRight size={15} /></Link>
+    <button className="menu-toggle" aria-label={menuOpen ? 'Close navigation' : 'Open navigation'} aria-expanded={menuOpen} aria-controls="mobile-navigation" onClick={() => setMenuOpen(!menuOpen)} data-testid="button-menu">{menuOpen ? <X /> : <Menu />}</button>
+    {menuOpen && <nav className="mobile-nav" id="mobile-navigation" aria-label="Mobile navigation">
+      {['About', 'Work', 'Services', 'FAQ'].map((item) => <a key={item} href={`/#${item.toLowerCase()}`} onClick={closeMenu}>{item}<ArrowUpRight size={16} /></a>)}
+      <Link href="/contact" onClick={closeMenu}>Contact<ArrowUpRight size={16} /></Link>
+      <span className="eyebrow">Independent by design · Working everywhere</span>
+    </nav>}
+  </header>;
+}
+
+function ContactPage() {
+  const [submitted, setSubmitted] = useState(false);
+  const [formError, setFormError] = useState('');
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    const name = String(data.get('name') || '').trim();
+    const email = String(data.get('email') || '').trim();
+    const focus = String(data.get('focus') || '');
+    const message = String(data.get('message') || '').trim();
+    if (!name || !email || !focus || !message) { setFormError('Please complete each required field to prepare your inquiry.'); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setFormError('Enter a valid email address so we know how to reach you.'); return; }
+    setFormError('');
+    setSubmitted(true);
+    form.reset();
+  };
+  return <div className="contact-page">
+    <SiteHeader />
+    <main id="contact-top">
+      <section className="contact-hero section-wrap">
+        <div className="contact-kicker"><span className="red-line" /><span className="eyebrow">A good place to begin</span><span className="eyebrow contact-index">bit3labs / Contact</span></div>
+        <div className="contact-hero-content">
+          <h1 className="display">Let’s create<br /><span>together.</span></h1>
+          <div className="contact-intro"><p>Have a website, mobile app, or ERP system in mind? Tell us what you’re working toward. We’ll bring thoughtful questions and a clear next step.</p><span className="eyebrow">New projects · Collaborations · Questions</span></div>
+        </div>
+        <div className="contact-hero-foot"><span className="eyebrow">Custom digital work, built around your business</span><a href="#inquiry">Start a conversation <ArrowDown size={14} /></a></div>
+        <span className="contact-watermark" aria-hidden="true">C</span>
+      </section>
+      <section className="contact-details section-wrap" aria-label="Project information">
+        <div className="contact-detail-intro"><span className="eyebrow">01 / The useful details</span><h2 className="display">A little context<br />goes a long way.</h2><p>Share the challenge, what a better outcome could look like, and anything that helps us understand the shape of the work.</p></div>
+        <div className="contact-detail-list">
+          <article><span className="detail-icon"><Layers3 size={19} /></span><div><span className="eyebrow">What we make</span><h3>Digital, made useful.</h3><p>Custom websites, mobile apps, and ERP systems—designed and developed with your team’s real needs in mind.</p></div></article>
+          <article><span className="detail-icon"><CalendarDays size={19} /></span><div><span className="eyebrow">What happens next</span><h3>A considered first step.</h3><p>We’ll review the details you share and map out a useful conversation about scope, fit, and what comes next.</p></div></article>
+        </div>
+      </section>
+      <section className="contact-inquiry" id="inquiry">
+        <div className="section-wrap inquiry-layout">
+          <div className="inquiry-aside"><span className="eyebrow">02 / Your inquiry</span><h2 className="display">Tell us<br />what’s next.</h2><p>No polished brief needed. A few honest details are enough to start.</p><div className="inquiry-note"><span className="note-marker" /><span className="eyebrow">A note on this preview</span><p>Your message is validated in this browser only. It is not sent or saved.</p></div></div>
+          <div className="contact-form-wrap">
+            {submitted ? <div className="success-panel" role="status" aria-live="polite"><span className="success-icon"><Check /></span><span className="eyebrow">Inquiry prepared</span><h3>Thank you<br />for the context.</h3><p>This preview does not send or save inquiries, so your note has not reached the studio. The form is ready to connect to a submission service.</p><button onClick={() => setSubmitted(false)} className="reset-link">Prepare another inquiry <ArrowRight size={15} /></button></div> :
+            <form className="inquiry-form dedicated-form" onSubmit={handleSubmit} noValidate>
+              <span className="eyebrow">A few starting points</span>
+              <label htmlFor="contact-name"><span className="field-label">Your name <span aria-hidden="true">*</span></span><input id="contact-name" name="name" type="text" placeholder="How should we address you?" autoComplete="name" required /></label>
+              <label htmlFor="contact-email"><span className="field-label">Email address <span aria-hidden="true">*</span></span><input id="contact-email" name="email" type="email" placeholder="you@company.com" autoComplete="email" required /></label>
+              <label htmlFor="contact-focus"><span className="field-label">What are you looking to make? <span aria-hidden="true">*</span></span><select id="contact-focus" name="focus" defaultValue="" required><option value="" disabled>Select a project type</option><option>Custom website</option><option>Mobile app</option><option>ERP system</option><option>Not sure yet</option></select></label>
+              <label htmlFor="contact-message"><span className="field-label">A little about the project <span aria-hidden="true">*</span></span><textarea id="contact-message" name="message" rows={4} placeholder="What are you trying to change, build, or make easier?" required /></label>
+              {formError && <p className="form-error" role="alert">{formError}</p>}
+              <button className="submit-button" type="submit">Prepare your inquiry <ArrowUpRight size={17} /></button>
+              <p className="privacy-note">Preview only. This form checks your details in the browser and does not send or store them.</p>
+            </form>}
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer className="contact-footer"><div className="footer-bottom section-wrap"><Link href="/" className="wordmark footer-mark">bit3labs<span className="period">.</span></Link><p>Independent digital studio<br />Working everywhere.</p><div className="footer-links"><a href="/#about">About</a><a href="/#work">Work</a><a href="/#services">Services</a><Link href="/contact">Contact</Link></div><span className="eyebrow">© {new Date().getFullYear()} bit3labs</span><a href="#contact-top" className="back-top">Back to top <ArrowUpRight size={14} /></a></div></footer>
+  </div>;
+}
+
 function App() {
+  const [location] = useLocation();
   const [activeFilter, setActiveFilter] = useState('All work');
   const [openFaq, setOpenFaq] = useState<number | null>(0);
-  const [menuOpen, setMenuOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [formError, setFormError] = useState('');
   const filtered = activeFilter === 'All work' ? projects : projects.filter((p) => p.category === activeFilter);
-  const closeMenu = () => setMenuOpen(false);
+  useEffect(() => {
+    const contact = location === '/contact';
+    const title = contact ? 'Contact bit3labs — Start a digital project' : 'bit3labs — Independent Digital Studio';
+    const description = contact
+      ? 'Start a conversation about a custom website, mobile app, or ERP system with bit3labs.'
+      : 'bit3labs creates thoughtful websites, mobile apps, and connected business systems for ambitious teams.';
+    document.title = title;
+    const setMeta = (selector: string, value: string) => document.querySelector<HTMLMetaElement>(selector)?.setAttribute('content', value);
+    setMeta('meta[name="description"]', description);
+    setMeta('meta[property="og:title"]', title);
+    setMeta('meta[property="og:description"]', description);
+    setMeta('meta[name="twitter:title"]', title);
+    setMeta('meta[name="twitter:description"]', description);
+  }, [location]);
+  if (location === '/contact') return <ContactPage />;
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -51,20 +143,7 @@ function App() {
   };
 
   return <main>
-    <header className="topbar">
-      <a href="#top" className="wordmark" aria-label="bit3labs home">bit3labs<span className="period">.</span></a>
-      <nav className="desktop-nav" aria-label="Main navigation">
-        <a href="#about">About</a><a href="#work">Work</a><a href="#services">Services</a><a href="#faq">FAQ</a>
-      </nav>
-      <a className="nav-cta" href="#contact">Start a project <ArrowUpRight size={15} /></a>
-      <button className="menu-toggle" aria-label={menuOpen ? 'Close navigation' : 'Open navigation'} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)} data-testid="button-menu">
-        {menuOpen ? <X /> : <Menu />}
-      </button>
-      {menuOpen && <nav className="mobile-nav" aria-label="Mobile navigation">
-        {['About', 'Work', 'Services', 'FAQ', 'Contact'].map((item) => <a key={item} href={`#${item.toLowerCase()}`} onClick={closeMenu}>{item}<ArrowUpRight size={16} /></a>)}
-        <span className="eyebrow">Independent by design · Working everywhere</span>
-      </nav>}
-    </header>
+    <SiteHeader />
 
     <section className="hero site-grid" id="top">
       <div className="hero-meta"><span className="eyebrow red">Independent digital studio</span><span className="eyebrow">Strategy · Design · Technology</span></div>
@@ -95,7 +174,7 @@ function App() {
           {categories.map((category) => <button key={category} onClick={() => setActiveFilter(category)} className={activeFilter === category ? 'filter active' : 'filter'} aria-pressed={activeFilter === category} data-testid={`filter-${category.toLowerCase().replaceAll(' ', '-')}`}>{category}<span>{category === 'All work' ? projects.length : projects.filter(p => p.category === category).length}</span></button>)}
         </div>
         <div className="project-grid" aria-live="polite">{filtered.map((project) => <ProjectCard key={project.title} project={project} index={projects.indexOf(project)} />)}</div>
-        <div className="work-foot"><span className="eyebrow">No two challenges are quite alike.</span><a href="#contact" className="text-link">Tell us what you’re building <ArrowRight size={16} /></a></div>
+        <div className="work-foot"><span className="eyebrow">No two challenges are quite alike.</span><Link href="/contact" className="text-link">Tell us what you’re building <ArrowRight size={16} /></Link></div>
       </div>
     </section>
 
@@ -111,7 +190,7 @@ function App() {
 
     <section className="team-section">
       <div className="team-image"><img src="https://images.pexels.com/photos/3184436/pexels-photo-3184436.jpeg?auto=compress&cs=tinysrgb&w=1800" alt="A small creative team working together around a table" loading="lazy" /><div className="team-caption"><span className="eyebrow">The people behind the pixels</span><span>Curious minds, sleeves rolled up.</span></div></div>
-      <div className="team-copy"><span className="eyebrow">Independent by design</span><h2 className="display">Close to the<br />work. <span>Close to you.</span></h2><p>We keep our studio intentionally small. You work directly with the people shaping your strategy, designing the experience, and building the thing. No hand-offs. No layers. Just good people, doing considered work.</p><a href="#contact" className="button-dark">Meet your next collaborators <ArrowUpRight size={16} /></a></div>
+      <div className="team-copy"><span className="eyebrow">Independent by design</span><h2 className="display">Close to the<br />work. <span>Close to you.</span></h2><p>We keep our studio intentionally small. You work directly with the people shaping your strategy, designing the experience, and building the thing. No hand-offs. No layers. Just good people, doing considered work.</p><Link href="/contact" className="button-dark">Meet your next collaborators <ArrowUpRight size={16} /></Link></div>
     </section>
 
     <section className="faq-section section-wrap" id="faq">
