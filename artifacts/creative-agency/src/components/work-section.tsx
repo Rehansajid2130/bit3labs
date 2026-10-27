@@ -166,31 +166,22 @@ export function WorkSection({
 
   return (
     <section className="editorial-section work-section" id="work">
-      <div className="section-wrap editorial-grid">
-        {/* Left Rail */}
-        <aside className="editorial-rail">
-          <span className="section-kicker">WORKS</span>
-        </aside>
-
-        {/* Main Column */}
-        <div className="editorial-main">
-          {/* Header Row */}
-          <div className="work-header-row">
-            <div className="work-title-wrap">
-              <h2 className="section-title">
-                SELECTED <span className="red">WORK</span> FROM RECENT PROJECTS
-              </h2>
-              <p className="editorial-lead">
-                We engineer bespoke digital platforms, custom e-commerce stores, native mobile applications, and mission-critical ERP &amp; inventory systems built for performance, reliability, and business growth.
-              </p>
-            </div>
-            <Link href="/work" className="explore-more-link">
-              <span>EXPLORE MORE</span>
-              <span className="square-arrow-icon" aria-hidden="true">
-                <ArrowRight size={14} />
-              </span>
-            </Link>
+      <div className="section-wrap">
+        {/* Header Row with WORKS above the title and EXPLORE MORE aligned */}
+        <div className="work-header-row">
+          <div className="work-title-wrap">
+            <span className="section-kicker">WORKS</span>
+            <h2 className="section-title">
+              SELECTED <span className="red">WORK</span> FROM RECENT PROJECTS
+            </h2>
           </div>
+          <Link href="/work" className="explore-more-link">
+            <span>EXPLORE MORE</span>
+            <span className="square-arrow-icon" aria-hidden="true">
+              <ArrowUpRight size={14} />
+            </span>
+          </Link>
+        </div>
 
           {/* Bento Grid (Matching image4.png layout) */}
           <div className="work-bento-grid">
@@ -254,7 +245,6 @@ export function WorkSection({
             )}
           </div>
         </div>
-      </div>
-    </section>
+      </section>
   );
 }

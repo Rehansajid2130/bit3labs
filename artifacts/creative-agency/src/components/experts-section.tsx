@@ -19,7 +19,7 @@ export function ExpertsSection() {
 
         <div className="section-wrap experts-content">
           <h2 className="experts-headline">
-            BUILT BY PASSIONATE <span className="red">EXPERTS</span>
+            BUILT BY PASSIONATE <span className="expert-badge-red">EXPERTS</span>
           </h2>
 
           <div className="experts-stats-grid">

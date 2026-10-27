@@ -8,6 +8,11 @@ interface SiteFooterProps {
 export function SiteFooter({ hideCta = false }: SiteFooterProps) {
   return (
     <footer className="site-footer">
+      {/* Giant subtle watermark bleeding off bottom edge */}
+      <span aria-hidden="true" className="footer-watermark">
+        BIT3LABS
+      </span>
+
       <div className="section-wrap footer-inner">
         <div className="footer-brand-col">
           <Link href="/" className="wordmark footer-wordmark">

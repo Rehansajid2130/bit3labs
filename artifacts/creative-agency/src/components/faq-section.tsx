@@ -47,21 +47,13 @@ export function FaqSection() {
 
         {/* Main Column */}
         <div className="editorial-main">
-          <div className="faq-header-row">
-            <div className="faq-title-wrap">
-              <h2 className="section-title">
-                FREQUENTLY ASKED <span className="red">QUESTIONS</span>
-              </h2>
-              <p className="editorial-lead">
-                Discover all the essential details about our work process. If you have any further questions, feel free to reach out at any time!
-              </p>
-            </div>
-            <Link href="/contact" className="faq-contact-btn">
-              <span>CONTACT US</span>
-              <span className="square-arrow-icon" aria-hidden="true">
-                <ArrowRight size={15} />
-              </span>
-            </Link>
+          <div className="faq-title-wrap">
+            <h2 className="section-title">
+              FREQUENTLY ASKED <span className="red">QUESTIONS</span>
+            </h2>
+            <p className="editorial-lead">
+              Discover all the essential details about our work process. If you have any further questions, feel free to reach out at any time!
+            </p>
           </div>
 
           {/* Accordion */}
@@ -77,10 +69,9 @@ export function FaqSection() {
                     onClick={() => toggle(idx)}
                     aria-expanded={isOpen}
                   >
-                    <span className="faq-num">//0{idx + 1}</span>
                     <span className="faq-question-text">{item.q}</span>
-                    <span className="faq-icon-badge" aria-hidden="true">
-                      {isOpen ? <Minus size={16} /> : <Plus size={16} />}
+                    <span className={`faq-icon-rotator ${isOpen ? 'is-rotated' : ''}`} aria-hidden="true">
+                      <Plus size={18} />
                     </span>
                   </button>
 
@@ -92,6 +83,16 @@ export function FaqSection() {
                 </div>
               );
             })}
+          </div>
+
+          {/* Contact CTA below accordion */}
+          <div className="faq-bottom-cta">
+            <Link href="/contact" className="faq-contact-btn">
+              <span>CONTACT US</span>
+              <span className="square-arrow-icon" aria-hidden="true">
+                <ArrowRight size={15} />
+              </span>
+            </Link>
           </div>
         </div>
       </div>
