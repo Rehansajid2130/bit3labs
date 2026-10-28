@@ -14,6 +14,7 @@ export function ExpertsSection() {
           alt="bit3labs passionate expert team members"
           className="experts-bg-img"
           loading="lazy"
+          decoding="async"
         />
         <div className="experts-scrim-overlay" />
 

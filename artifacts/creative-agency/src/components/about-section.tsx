@@ -20,6 +20,7 @@ export function AboutSection() {
               alt="Collaborative creative team working together at studio table"
               className="about-studio-img"
               loading="lazy"
+              decoding="async"
             />
           </div>
         </div>

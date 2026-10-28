@@ -18,7 +18,34 @@ export function ProjectDetailPage() {
   const [, params] = useRoute('/work/:id');
   const projectId = params?.id;
 
-  const project = WORK_PROJECTS.find((p) => p.id === projectId) || WORK_PROJECTS[0];
+  const project = WORK_PROJECTS.find((p) => p.id === projectId);
+
+  if (!project) {
+    return (
+      <main className="page-main notfound-page">
+        <div className="page-hero-banner site-grid">
+          <div className="section-wrap">
+            <span className="section-kicker">// CASE STUDY ARCHIVE</span>
+            <h1 className="page-hero-title">
+              CASE STUDY <span className="red">NOT</span> FOUND
+            </h1>
+            <p className="page-hero-desc">
+              The project coordinate or case study you requested does not exist in our system archive.
+            </p>
+            <div style={{ marginTop: '24px' }}>
+              <Link href="/work" className="hero-explore-btn">
+                <span>RETURN TO ALL PROJECTS</span>
+                <span className="square-arrow-icon" aria-hidden="true">
+                  <ArrowRight size={14} />
+                </span>
+              </Link>
+            </div>
+          </div>
+        </div>
+        <SiteFooter />
+      </main>
+    );
+  }
 
   // Suggest 3 complementary or related projects (excluding active)
   const similarProjects = WORK_PROJECTS.filter((p) => p.id !== project.id).slice(0, 3);
@@ -84,6 +111,7 @@ export function ProjectDetailPage() {
                 alt={project.title}
                 className="project-frame-img"
                 loading="eager"
+                decoding="async"
               />
             </div>
           </div>
@@ -180,6 +208,7 @@ export function ProjectDetailPage() {
                   src={project.secondaryImage}
                   alt={`${project.title} detailed interface`}
                   loading="lazy"
+                  decoding="async"
                 />
               </div>
             )}
@@ -217,7 +246,7 @@ export function ProjectDetailPage() {
                   className="similar-bento-card"
                 >
                   <div className="similar-img-frame">
-                    <img src={item.image} alt={item.title} loading="lazy" />
+                    <img src={item.image} alt={item.title} loading="lazy" decoding="async" />
                     <span className="similar-card-tag">
                       {item.category}
                     </span>

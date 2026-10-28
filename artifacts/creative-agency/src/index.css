@@ -179,7 +179,7 @@ img {
 .desktop-nav {
   display: flex;
   align-items: center;
-  gap: 36px;
+  gap: 32px;
 }
 
 .desktop-nav a {
@@ -189,13 +189,40 @@ img {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-text-dark);
-  transition: color 0.2s;
-  padding-block: 4px;
+  text-decoration: none;
+  position: relative;
+  padding-block: 6px;
+  display: inline-flex;
+  align-items: center;
+  transition: opacity 0.2s;
 }
 
-.desktop-nav a:hover,
+.desktop-nav a:hover {
+  color: var(--color-text-dark);
+  opacity: 0.75;
+}
+
+.desktop-nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-red);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.2s ease;
+}
+
+.desktop-nav a:hover::after,
+.desktop-nav a.nav-active::after {
+  transform: scaleX(1);
+}
+
 .desktop-nav a.nav-active {
-  color: var(--color-red);
+  color: var(--color-text-dark);
+  opacity: 1;
 }
 
 .nav-cta-btn {
@@ -246,17 +273,42 @@ img {
   .mobile-nav a {
     font-family: var(--font-display);
     font-size: 22px;
-    font-weight: 400;
+    font-weight: 600;
     letter-spacing: 0.02em;
     text-transform: uppercase;
+    color: var(--color-text-dark);
+    position: relative;
+    width: fit-content;
+    padding-bottom: 4px;
+    text-decoration: none;
   }
-  .mobile-cta {
-    background-color: var(--color-red) !important;
-    color: #FFF !important;
-    padding: 12px !important;
+  .mobile-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--color-red);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s ease;
+  }
+  .mobile-nav a.nav-active::after {
+    transform: scaleX(1);
+  }
+  .mobile-nav a.mobile-cta {
+    background-color: var(--color-red);
+    color: #FFFFFF;
+    font-family: var(--font-mono);
+    padding: 12px;
     text-align: center;
-    font-size: 15px !important;
+    font-size: 15px;
     margin-top: 8px;
+    width: 100%;
+  }
+  .mobile-nav a.mobile-cta::after {
+    display: none;
   }
 }
 
@@ -2190,89 +2242,144 @@ img {
   align-self: flex-start;
 }
 
-.roles-listing-list {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.role-listing-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 32px;
+/* Careers Coming Soon Experience */
+.careers-coming-soon-card {
   background-color: #FFFFFF;
   border: 1px solid var(--color-border);
-  padding: 32px;
-  transition: border-color 0.2s;
+  padding: clamp(28px, 5vw, 44px);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
-.role-listing-card:hover {
-  border-color: var(--color-text-dark);
-}
-
-.role-main-info {
-  flex: 1;
-  min-width: 0;
-}
-
-.role-badge-row {
+.coming-soon-badge-row {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 12px;
+  gap: 12px;
 }
 
-.role-dep-badge {
+.status-indicator-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-family: var(--font-mono);
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: var(--color-red);
+  text-transform: uppercase;
+  padding: 5px 12px;
+  background-color: #111111;
+  color: #FFFFFF;
+}
+
+.status-radar-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--color-red);
+  box-shadow: 0 0 0 0 rgba(229, 25, 25, 0.7);
+  animation: radar-pulse 2s infinite;
+}
+
+@keyframes radar-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(229, 25, 25, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 7px rgba(229, 25, 25, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(229, 25, 25, 0);
+  }
+}
+
+.coming-soon-display-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4.5vw, 54px);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--color-text-dark);
+  margin: 0;
+}
+
+.coming-soon-desc {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--color-text-muted);
+  max-width: 680px;
+  margin: 0;
+}
+
+.coming-soon-disciplines-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.pipeline-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
   text-transform: uppercase;
 }
 
-.role-meta-pill {
+.pipeline-tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pipeline-tag {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 500;
-  padding: 3px 8px;
+  padding: 6px 12px;
   background-color: var(--color-bg-light);
   border: 1px solid var(--color-border);
   color: var(--color-text-dark);
 }
 
-.role-display-title {
-  font-family: var(--font-display);
-  font-size: clamp(22px, 2.5vw, 30px);
-  font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+.coming-soon-action-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  background-color: var(--color-bg-light);
+  border: 1px solid var(--color-border);
+  padding: 24px;
+}
+
+.coming-soon-action-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.coming-soon-action-text strong {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--color-text-dark);
-  margin-bottom: 10px;
+  margin-bottom: 4px;
 }
 
-.role-summary-text {
-  font-size: 13px;
-  line-height: 1.6;
+.coming-soon-action-text p {
+  font-size: 12.5px;
   color: var(--color-text-muted);
-  max-width: 680px;
-  margin-bottom: 18px;
+  margin: 0;
 }
 
-.role-stack-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.role-action-wrap {
-  flex-shrink: 0;
-}
-
-.role-view-btn {
+.role-apply-submit-btn {
   display: inline-flex;
   align-items: center;
   gap: 12px;
@@ -2281,20 +2388,29 @@ img {
   color: #FFFFFF;
   font-family: var(--font-display);
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   transition: background-color 0.2s;
+  text-decoration: none;
+  flex-shrink: 0;
 }
 
-.role-view-btn:hover {
+.role-apply-submit-btn:hover {
   background-color: var(--color-red);
+  color: #FFFFFF;
 }
 
-.role-view-btn .square-arrow-icon {
-  background-color: transparent;
-  width: auto;
-  height: auto;
+@media (max-width: 768px) {
+  .coming-soon-action-box {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+  .role-apply-submit-btn {
+    width: 100%;
+    justify-content: space-between;
+  }
 }
 
 /* General Apply Banner */

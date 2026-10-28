@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'wouter';
 import { Menu, X } from 'lucide-react';
 
@@ -7,8 +7,18 @@ export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const close = () => setMobileOpen(false);
 
-  // ponytail: keep active link check minimal and reliable
-  const isActive = (path: string) => location === path;
+  // Close mobile navigation drawer on Escape key press
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMobileOpen(false);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [mobileOpen]);
+
+  // ponytail: keep active link check minimal and reliable (handles exact path and slash-delimited sub-paths)
+  const isActive = (path: string) => location === path || (path !== '/' && location.startsWith(`${path}/`));
 
   return (
     <header className="topbar">
@@ -17,12 +27,11 @@ export function SiteHeader() {
       </Link>
 
       <nav className="desktop-nav" aria-label="Main navigation">
-        <Link href="/about" className={isActive('/about') ? 'nav-active' : ''}>ABOUT</Link>
-        <Link href="/work" className={isActive('/work') ? 'nav-active' : ''}>WORK</Link>
-        <Link href="/services" className={isActive('/services') ? 'nav-active' : ''}>SERVICES</Link>
-        <Link href="/blog" className={isActive('/blog') ? 'nav-active' : ''}>BLOG</Link>
-        <Link href="/careers" className={isActive('/careers') ? 'nav-active' : ''}>CAREERS</Link>
-        <Link href="/contact" className={isActive('/contact') ? 'nav-active' : ''}>CONTACT</Link>
+        <Link href="/about" className={isActive('/about') ? 'nav-active' : ''} aria-current={isActive('/about') ? 'page' : undefined}>ABOUT</Link>
+        <Link href="/work" className={isActive('/work') ? 'nav-active' : ''} aria-current={isActive('/work') ? 'page' : undefined}>WORK</Link>
+        <Link href="/services" className={isActive('/services') ? 'nav-active' : ''} aria-current={isActive('/services') ? 'page' : undefined}>SERVICES</Link>
+        <Link href="/blog" className={isActive('/blog') ? 'nav-active' : ''} aria-current={isActive('/blog') ? 'page' : undefined}>BLOG</Link>
+        <Link href="/contact" className={isActive('/contact') ? 'nav-active' : ''} aria-current={isActive('/contact') ? 'page' : undefined}>CONTACT</Link>
       </nav>
 
       <Link href="/contact" className="nav-cta-btn">
@@ -33,19 +42,19 @@ export function SiteHeader() {
         className="menu-toggle"
         aria-label={mobileOpen ? 'Close navigation' : 'Open navigation'}
         aria-expanded={mobileOpen}
+        aria-controls="mobile-nav-menu"
         onClick={() => setMobileOpen(!mobileOpen)}
       >
         {mobileOpen ? <X size={22} /> : <Menu size={22} />}
       </button>
 
       {mobileOpen && (
-        <nav className="mobile-nav" aria-label="Mobile navigation">
-          <Link href="/about" onClick={close}>ABOUT</Link>
-          <Link href="/work" onClick={close}>WORK</Link>
-          <Link href="/services" onClick={close}>SERVICES</Link>
-          <Link href="/blog" onClick={close}>BLOG</Link>
-          <Link href="/careers" onClick={close}>CAREERS</Link>
-          <Link href="/contact" onClick={close}>CONTACT</Link>
+        <nav id="mobile-nav-menu" className="mobile-nav" aria-label="Mobile navigation">
+          <Link href="/about" className={isActive('/about') ? 'nav-active' : ''} aria-current={isActive('/about') ? 'page' : undefined} onClick={close}>ABOUT</Link>
+          <Link href="/work" className={isActive('/work') ? 'nav-active' : ''} aria-current={isActive('/work') ? 'page' : undefined} onClick={close}>WORK</Link>
+          <Link href="/services" className={isActive('/services') ? 'nav-active' : ''} aria-current={isActive('/services') ? 'page' : undefined} onClick={close}>SERVICES</Link>
+          <Link href="/blog" className={isActive('/blog') ? 'nav-active' : ''} aria-current={isActive('/blog') ? 'page' : undefined} onClick={close}>BLOG</Link>
+          <Link href="/contact" className={isActive('/contact') ? 'nav-active' : ''} aria-current={isActive('/contact') ? 'page' : undefined} onClick={close}>CONTACT</Link>
           <Link href="/contact" className="mobile-cta" onClick={close}>START PROJECT</Link>
         </nav>
       )}

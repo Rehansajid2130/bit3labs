@@ -190,7 +190,7 @@ export function WorkSection({
               {projects[0] && (
                 <Link href={`/work/${projects[0].id}`} className="bento-card bento-card-tall">
                   <div className="bento-img-wrap">
-                    <img src={projects[0].image} alt={projects[0].title} loading="lazy" />
+                    <img src={projects[0].image} alt={projects[0].title} loading="lazy" decoding="async" />
                   </div>
                   <div className="bento-card-footer">
                     <span className="bento-title">{projects[0].title}</span>
@@ -205,7 +205,7 @@ export function WorkSection({
               {projects[1] && (
                 <Link href={`/work/${projects[1].id}`} className="bento-card bento-card-stacked">
                   <div className="bento-img-wrap">
-                    <img src={projects[1].image} alt={projects[1].title} loading="lazy" />
+                    <img src={projects[1].image} alt={projects[1].title} loading="lazy" decoding="async" />
                   </div>
                   <div className="bento-card-footer">
                     <span className="bento-title">{projects[1].title}</span>
@@ -217,7 +217,7 @@ export function WorkSection({
               {projects[2] && (
                 <Link href={`/work/${projects[2].id}`} className="bento-card bento-card-stacked">
                   <div className="bento-img-wrap fashion-bw">
-                    <img src={projects[2].image} alt={projects[2].title} loading="lazy" />
+                    <img src={projects[2].image} alt={projects[2].title} loading="lazy" decoding="async" />
                   </div>
                   <div className="bento-card-footer">
                     <span className="bento-title">{projects[2].title}</span>
@@ -233,7 +233,7 @@ export function WorkSection({
                 {projects.slice(3).map((item) => (
                   <Link key={item.id} href={`/work/${item.id}`} className="bento-card bento-card-bottom">
                     <div className="bento-img-wrap">
-                      <img src={item.image} alt={item.title} loading="lazy" />
+                      <img src={item.image} alt={item.title} loading="lazy" decoding="async" />
                     </div>
                     <div className="bento-card-footer">
                       <span className="bento-title">{item.title}</span>
