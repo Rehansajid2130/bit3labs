@@ -16,13 +16,13 @@ export function ContactSection() {
     const message = String(data.get('message') || '').trim();
     const honeypot = String(data.get('company_hp') || '').trim();
 
-    if (!name || !projectType || !message) {
+    if (!name || !email || !projectType || !message) {
       setError('Please fill out all required fields marked with *');
       return;
     }
 
-    // Basic email validation if provided
-    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    // Email validation
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       setError('Please provide a valid email address.');
       return;
     }
@@ -53,11 +53,19 @@ export function ContactSection() {
 
       // Store in client-side storage backup
       try {
-        const stored = JSON.parse(localStorage.getItem('bit3labs_inquiries') || '[]');
+        const raw = localStorage.getItem('bit3labs_inquiries');
+        let stored: any[] = [];
+        try {
+          const parsed = JSON.parse(raw || '[]');
+          if (Array.isArray(parsed)) stored = parsed;
+        } catch {
+          stored = [];
+        }
         stored.push({
           name,
           email,
           projectType,
+          message,
           timestamp: new Date().toISOString(),
         });
         localStorage.setItem('bit3labs_inquiries', JSON.stringify(stored));
@@ -177,13 +185,14 @@ export function ContactSection() {
                 </label>
 
                 <label className="dark-form-field">
-                  <span className="field-title">EMAIL ADDRESS</span>
+                  <span className="field-title">EMAIL ADDRESS *</span>
                   <input
                     name="email"
                     type="email"
                     placeholder="you@company.com"
                     autoComplete="email"
                     disabled={isSubmitting}
+                    required
                   />
                 </label>
 

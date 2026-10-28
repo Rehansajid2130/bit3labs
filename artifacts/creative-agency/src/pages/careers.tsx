@@ -121,18 +121,21 @@ export function CareersPage() {
 
               <div className="coming-soon-action-box">
                 <div className="coming-soon-action-text">
-                  <strong>WANT EARLY ACCESS BEFORE ROLES GO PUBLIC?</strong>
-                  <p>Send your portfolio, GitHub, or case studies to join our private talent network.</p>
+                  <span className="action-box-tag">// TALENT ACCELERATOR</span>
+                  <h4 className="action-box-heading">WANT EARLY ACCESS BEFORE ROLES GO PUBLIC?</h4>
+                  <p className="action-box-desc">Send your portfolio, GitHub, or case studies to join our private talent network.</p>
                 </div>
-                <a
-                  href="mailto:careers@bit3labs.com?subject=Early%20Talent%20Roster%20-%20bit3labs"
-                  className="role-apply-submit-btn"
-                >
-                  <span>JOIN TALENT NETWORK</span>
-                  <span className="square-arrow-icon" aria-hidden="true">
-                    <ArrowRight size={14} />
-                  </span>
-                </a>
+                <div className="coming-soon-action-btn-wrap">
+                  <a
+                    href="mailto:careers@bit3labs.com?subject=Early%20Talent%20Roster%20-%20bit3labs"
+                    className="coming-soon-join-btn"
+                  >
+                    <span>JOIN TALENT NETWORK</span>
+                    <span className="square-arrow-icon" aria-hidden="true">
+                      <ArrowRight size={14} />
+                    </span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>

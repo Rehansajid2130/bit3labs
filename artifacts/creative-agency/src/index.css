@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&family=DM+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap');
 @import 'tailwindcss';
 
 /* ==========================================================================
@@ -2352,62 +2351,96 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 24px;
+  gap: 32px;
   background-color: var(--color-bg-light);
   border: 1px solid var(--color-border);
-  padding: 24px;
+  padding: 24px 28px;
 }
 
 .coming-soon-action-text {
-  flex: 1;
+  flex: 1 1 auto;
   min-width: 0;
 }
 
-.coming-soon-action-text strong {
-  display: block;
+.action-box-tag {
+  display: inline-block;
   font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.06em;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-text-dark);
-  margin-bottom: 4px;
+  color: var(--color-red);
+  margin-bottom: 6px;
 }
 
-.coming-soon-action-text p {
-  font-size: 12.5px;
+.action-box-heading {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--color-text-dark);
+  margin: 0 0 6px 0;
+  line-height: 1.3;
+}
+
+.action-box-desc {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.5;
   color: var(--color-text-muted);
   margin: 0;
 }
 
-.role-apply-submit-btn {
+.coming-soon-action-btn-wrap {
+  flex-shrink: 0;
+}
+
+.coming-soon-join-btn {
   display: inline-flex;
   align-items: center;
   gap: 12px;
   padding: 14px 22px;
-  background-color: #0D0D0D;
+  background-color: var(--color-red);
   color: #FFFFFF;
   font-family: var(--font-display);
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 12.5px;
+  font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  transition: background-color 0.2s;
   text-decoration: none;
+  white-space: nowrap;
+  width: auto;
   flex-shrink: 0;
+  transition: background-color 0.2s ease;
 }
 
-.role-apply-submit-btn:hover {
-  background-color: var(--color-red);
+.coming-soon-join-btn:hover {
+  background-color: #CC1414;
+  color: #FFFFFF;
+}
+
+.coming-soon-join-btn .square-arrow-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  background-color: transparent;
   color: #FFFFFF;
 }
 
 @media (max-width: 768px) {
   .coming-soon-action-box {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
     gap: 18px;
+    padding: 20px;
   }
-  .role-apply-submit-btn {
+  .coming-soon-action-btn-wrap {
+    width: 100%;
+  }
+  .coming-soon-join-btn {
     width: 100%;
     justify-content: space-between;
   }

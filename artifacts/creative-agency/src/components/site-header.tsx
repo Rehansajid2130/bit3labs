@@ -17,6 +17,23 @@ export function SiteHeader() {
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [mobileOpen]);
 
+  // Prevent background scroll bleed when mobile drawer is open
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileOpen]);
+
+  // Auto-close mobile drawer on route change
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [location]);
+
   // ponytail: keep active link check minimal and reliable (handles exact path and slash-delimited sub-paths)
   const isActive = (path: string) => location === path || (path !== '/' && location.startsWith(`${path}/`));
 
