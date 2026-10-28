@@ -23,6 +23,7 @@ export function HeroSection() {
             <h1 className="hero-display-title">
               <span className="hero-line">WE CREATE</span>
               <span className="hero-line">EXCEPTIONAL</span>
+              <span className="hero-line hero-line-red hero-line-red-mobile">EXPERIENCES</span>
             </h1>
           </div>
 
@@ -48,7 +49,7 @@ export function HeroSection() {
           </div>
         </div>
 
-        {/* Bottom row: Info box flush alongside giant red EXPERIENCES */}
+        {/* Bottom row: Info box flush alongside giant red EXPERIENCES (desktop only) */}
         <div className="hero-lockup-bottom">
           <div className="hero-desc-box">
             <p>
@@ -59,7 +60,7 @@ export function HeroSection() {
             </p>
           </div>
 
-          <span className="hero-display-title hero-line-red">EXPERIENCES</span>
+          <span className="hero-display-title hero-line-red hero-line-red-desktop">EXPERIENCES</span>
         </div>
       </div>
     </section>
