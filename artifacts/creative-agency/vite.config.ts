@@ -17,12 +17,28 @@ function contactApiPlugin() {
           return;
         }
 
+        const MAX_PAYLOAD = 50 * 1024; // 50 KB ceiling to prevent memory exhaustion DoS
         let body = '';
+        let byteCount = 0;
+        let isTooLarge = false;
+
         req.on('data', (chunk: any) => {
+          if (isTooLarge) return;
+          byteCount += chunk.length;
+          if (byteCount > MAX_PAYLOAD) {
+            isTooLarge = true;
+            res.statusCode = 413;
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({ error: 'Payload exceeds maximum permitted size (50KB).' }));
+            req.destroy();
+            return;
+          }
           body += chunk;
         });
 
         req.on('end', () => {
+          if (isTooLarge) return;
+
           try {
             const payload = JSON.parse(body || '{}');
             const { name, email, projectType, message, honeypot } = payload;
@@ -35,19 +51,25 @@ function contactApiPlugin() {
               return;
             }
 
-            if (!name || !projectType || !message) {
+            if (!name || !email || !projectType || !message) {
               res.statusCode = 400;
               res.setHeader('Content-Type', 'application/json');
-              res.end(JSON.stringify({ error: 'Please provide all required fields (name, projectType, message).' }));
+              res.end(JSON.stringify({ error: 'Please provide all required fields (name, email, projectType, message).' }));
               return;
             }
 
+            // CWE-117: Sanitize user input against log injection / control characters
+            const sanitizeLog = (val: unknown) =>
+              String(val ?? '')
+                .replace(/[\r\n\x1b\x00-\x1f\x7f]/g, ' ')
+                .slice(0, 200);
+
             console.log(`\n======================================================`);
             console.log(`[bit3labs NEW LEAD RECEIVED] ${new Date().toISOString()}`);
-            console.log(`Client Name  : ${name}`);
-            console.log(`Client Email : ${email || 'None provided'}`);
-            console.log(`Project Type : ${projectType}`);
-            console.log(`Message      : ${message}`);
+            console.log(`Client Name  : ${sanitizeLog(name)}`);
+            console.log(`Client Email : ${sanitizeLog(email)}`);
+            console.log(`Project Type : ${sanitizeLog(projectType)}`);
+            console.log(`Message      : ${sanitizeLog(message)}`);
             console.log(`======================================================\n`);
 
             res.statusCode = 200;
@@ -59,7 +81,7 @@ function contactApiPlugin() {
                 timestamp: new Date().toISOString(),
               }),
             );
-          } catch (e) {
+          } catch {
             res.statusCode = 400;
             res.setHeader('Content-Type', 'application/json');
             res.end(JSON.stringify({ error: 'Malformed JSON payload' }));

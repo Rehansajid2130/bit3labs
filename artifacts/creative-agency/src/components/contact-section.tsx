@@ -51,35 +51,24 @@ export function ContactSection() {
         throw new Error(resData.error || 'Server error transmitting message');
       }
 
-      // Store in client-side storage backup
+      // Store ephemeral submission metadata in sessionStorage (clears on tab close, avoiding persistent PII storage)
       try {
-        const raw = localStorage.getItem('bit3labs_inquiries');
-        let stored: any[] = [];
-        try {
-          const parsed = JSON.parse(raw || '[]');
-          if (Array.isArray(parsed)) stored = parsed;
-        } catch {
-          stored = [];
-        }
-        stored.push({
-          name,
-          email,
-          projectType,
-          message,
-          timestamp: new Date().toISOString(),
-        });
-        localStorage.setItem('bit3labs_inquiries', JSON.stringify(stored));
+        sessionStorage.setItem(
+          'bit3labs_last_inquiry',
+          JSON.stringify({
+            timestamp: new Date().toISOString(),
+            projectType,
+          }),
+        );
       } catch {
-        // Safe ignore storage quota
+        // Safe ignore private browsing quota
       }
 
       setReceiptTime(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
       setSubmitted(true);
     } catch (err: any) {
-      // If network fails (e.g. offline preview), save locally and confirm safely
-      console.warn('API error, recording locally:', err.message);
-      setReceiptTime(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
-      setSubmitted(true);
+      console.warn('Inquiry transmission failed:', err.message);
+      setError('Unable to transmit inquiry automatically. Please email our team directly at hello@bit3labs.com');
     } finally {
       setIsSubmitting(false);
     }
