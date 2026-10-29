@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowRight, Plus, Minus } from 'lucide-react';
+import { ArrowRight, Plus } from 'lucide-react';
 import { Link } from 'wouter';
 
 interface FaqItem {
@@ -65,9 +65,11 @@ export function FaqSection() {
                 <div key={item.q} className={`faq-card ${isOpen ? 'is-open' : ''}`}>
                   <button
                     type="button"
+                    id={`faq-question-${idx}`}
                     className="faq-toggle-btn"
                     onClick={() => toggle(idx)}
                     aria-expanded={isOpen}
+                    aria-controls={`faq-answer-${idx}`}
                   >
                     <span className="faq-question-text">{item.q}</span>
                     <span className={`faq-icon-rotator ${isOpen ? 'is-rotated' : ''}`} aria-hidden="true">
@@ -75,11 +77,17 @@ export function FaqSection() {
                     </span>
                   </button>
 
-                  {isOpen && (
-                    <div className="faq-body">
+                  {/* ponytail: CSS grid transition (0fr -> 1fr) provides silky smooth height animation without DOM pops */}
+                  <div
+                    id={`faq-answer-${idx}`}
+                    role="region"
+                    aria-labelledby={`faq-question-${idx}`}
+                    className={`faq-body-collapse ${isOpen ? 'is-open' : ''}`}
+                  >
+                    <div className="faq-body-inner">
                       <p>{item.a}</p>
                     </div>
-                  )}
+                  </div>
                 </div>
               );
             })}

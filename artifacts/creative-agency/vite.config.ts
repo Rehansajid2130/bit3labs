@@ -138,6 +138,15 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, 'dist'),
     emptyOutDir: true,
+    // ponytail: vendor chunking to maximize browser cache hits and reduce initial payload
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor-react': ['react', 'react-dom', 'wouter'],
+          'vendor-icons': ['lucide-react'],
+        },
+      },
+    },
   },
   server: {
     port,

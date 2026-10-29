@@ -1,11 +1,30 @@
-export function ExpertsSection() {
-  const expertStats = [
-    { value: '45+', label: 'TEAM MEMBERS' },
-    { value: '12', label: 'COUNTRIES' },
-    { value: '8', label: 'SPECIALIZATIONS' },
-    { value: '100%', label: 'REMOTE FIRST' },
-  ];
+import { useCountUp } from '@/hooks/use-count-up';
 
+interface ExpertStat {
+  value: string;
+  label: string;
+}
+
+const EXPERT_STATS: ExpertStat[] = [
+  { value: '45+', label: 'TEAM MEMBERS' },
+  { value: '12', label: 'COUNTRIES' },
+  { value: '8', label: 'SPECIALIZATIONS' },
+  { value: '100%', label: 'REMOTE FIRST' },
+];
+
+// ponytail: smooth count-up item triggered when scrolled into view
+function ExpertStatItem({ item }: { item: ExpertStat }) {
+  const { elementRef, display } = useCountUp(item.value);
+
+  return (
+    <div ref={elementRef} className="expert-stat-card">
+      <strong className="expert-stat-value">{display}</strong>
+      <span className="expert-stat-label">{item.label}</span>
+    </div>
+  );
+}
+
+export function ExpertsSection() {
   return (
     <section className="experts-section">
       <div className="experts-hero-banner">
@@ -24,11 +43,8 @@ export function ExpertsSection() {
           </h2>
 
           <div className="experts-stats-grid">
-            {expertStats.map((item) => (
-              <div key={item.label} className="expert-stat-card">
-                <strong className="expert-stat-value">{item.value}</strong>
-                <span className="expert-stat-label">{item.label}</span>
-              </div>
+            {EXPERT_STATS.map((item) => (
+              <ExpertStatItem key={item.label} item={item} />
             ))}
           </div>
         </div>
