@@ -46,8 +46,8 @@
 
 .hero-top-grid {
   display: grid;
-  grid-template-columns: 1fr 300px;
-  gap: 32px;
+  grid-template-columns: 1fr 310px;
+  gap: 40px;
   align-items: start;
   width: 100%;
 }
@@ -55,28 +55,32 @@
 .hero-headline-block {
   display: flex;
   flex-direction: column;
+  margin-top: 78px;
+  padding: 0;
 }
+
+
 
 .hero-disciplines-cta-col {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 28px;
-  padding-top: 12px;
+  padding-top: 24px;
 }
 
 .hero-disciplines-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
   width: 100%;
-  max-width: 270px;
+  max-width: 280px;
 }
 
 .discipline-line {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   font-family: var(--font-mono);
   font-size: 11px;
   text-transform: none;
@@ -94,7 +98,7 @@
 
 .discipline-label {
   color: var(--color-text-dark);
-  font-weight: 500;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.02em;
 }
@@ -102,8 +106,8 @@
 .hero-lockup-bottom {
   display: flex;
   align-items: flex-end;
-  gap: 28px;
-  margin-top: 16px;
+  gap: 24px;
+  margin-top: 20px;
   width: 100%;
 }
 
@@ -112,8 +116,10 @@
   color: #ECEAE4;
   padding: 22px 26px;
   width: 100%;
-  max-width: 380px;
-  flex: 0 0 auto;
+  max-width: 490px;
+  flex: 0 0 490px;
+  text-align: justify;
+
 }
 
 .hero-desc-box p {
@@ -129,9 +135,9 @@
 
 .hero-line-red {
   color: var(--color-red) !important;
-  font-weight: 600;
-  line-height: 1.02;
-  letter-spacing: 0.02em;
+  font-weight: 700;
+  line-height: 0.86;
+  letter-spacing: -0.035em;
   white-space: nowrap;
 }
 
@@ -166,11 +172,12 @@
   display: flex;
   flex-direction: column;
   margin: 0;
+  padding: 0;
   font-family: var(--font-display);
-  font-size: clamp(48px, 7.8vw, 108px);
-  font-weight: 600;
-  line-height: 1.02;
-  letter-spacing: 0.02em;
+  font-size: clamp(96px, 9.4vw, 142px);
+  font-weight: 700;
+  line-height: 0.86;
+  letter-spacing: -0.035em;
   text-transform: uppercase;
   color: var(--color-text-dark);
 }
@@ -180,7 +187,7 @@
 }
 
 .hero-line:first-child {
-  margin-bottom: 8px;
+  margin-bottom: 2px;
 }
 
 .hero-line-red-mobile {
@@ -189,42 +196,54 @@
 
 .hero-line-red-desktop {
   display: inline-block;
+  color: var(--color-red) !important;
+  flex: 1;
+  white-space: nowrap;
+  margin: 0 !important;
 }
 
 @media (max-width: 900px) {
   .hero-section {
-    padding-top: 28px;
-    padding-bottom: 40px;
+    padding-top: 24px;
+    padding-bottom: 36px;
+  }
+  .hero-headline-block {
+    margin: 0;
+  }
+  .hero-kicker-red {
+    font-size: 12px;
+    margin-bottom: 6px;
   }
   .hero-line-red-mobile {
     display: block !important;
-    margin-top: 4px;
+    margin-top: 2px;
   }
   .hero-line-red-desktop {
     display: none !important;
   }
   .hero-display-title {
-    font-size: clamp(38px, 11vw, 68px);
-    line-height: 1.02;
-    letter-spacing: 0.01em;
+    font-size: clamp(44px, 8.5vw, 76px);
+    line-height: 0.88;
+    letter-spacing: -0.03em;
+    margin: 0;
   }
   .hero-line:first-child {
-    margin-bottom: 4px;
+    margin-bottom: 2px;
   }
   .hero-top-grid {
     grid-template-columns: 1fr;
-    gap: 26px;
+    gap: 24px;
   }
   .hero-disciplines-cta-col {
     align-items: flex-start;
     padding-top: 0;
-    gap: 22px;
+    gap: 20px;
     width: 100%;
   }
   .hero-disciplines-list {
     max-width: 100%;
     width: 100%;
-    gap: 12px;
+    gap: 10px;
   }
   .discipline-line {
     font-size: 11px;
@@ -232,14 +251,15 @@
   .hero-lockup-bottom {
     flex-direction: column;
     align-items: flex-start;
-    gap: 18px;
-    margin-top: 22px;
+    gap: 16px;
+    margin-top: 18px;
     width: 100%;
   }
   .hero-desc-box {
     max-width: 100%;
     width: 100%;
-    padding: 20px 22px;
+    flex: 1 1 auto;
+    padding: 18px 20px;
   }
   .hero-desc-box p {
     font-size: 13px;
@@ -252,26 +272,32 @@
 
 @media (max-width: 640px) {
   .hero-section {
-    padding-top: 20px;
-    padding-bottom: 32px;
+    padding-top: 18px;
+    padding-bottom: 28px;
+  }
+  .hero-kicker-red {
+    font-size: 11px;
+    margin-bottom: 4px;
   }
   .hero-display-title {
-    font-size: clamp(34px, 12vw, 54px);
+    font-size: clamp(34px, 9.6vw, 54px);
+    line-height: 0.88;
+    letter-spacing: -0.025em;
   }
   .hero-top-grid {
-    gap: 20px;
-  }
-  .hero-disciplines-cta-col {
     gap: 18px;
   }
+  .hero-disciplines-cta-col {
+    gap: 16px;
+  }
   .hero-lockup-bottom {
-    margin-top: 18px;
+    margin-top: 14px;
   }
   .hero-desc-box {
-    padding: 18px;
+    padding: 16px;
   }
   .hero-desc-box p {
-    font-size: 12.5px;
+    font-size: 12px;
     line-height: 1.55;
   }
 }

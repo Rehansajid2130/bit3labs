@@ -1,28 +1,26 @@
-import { useEffect, lazy, Suspense } from 'react';
+import { useEffect } from 'react';
 import { Route, Switch, useLocation } from 'wouter';
 import { SiteHeader } from '@/components/site-header';
 import { BackToTop } from '@/components/back-to-top';
 import { HomePage } from '@/pages/home';
+import { AboutPage } from '@/pages/about';
+import { WorkPage } from '@/pages/work';
+import { ProjectDetailPage } from '@/pages/project-detail';
+import { ServicesPage } from '@/pages/services';
+import { ContactPage } from '@/pages/contact';
+import { CareersPage } from '@/pages/careers';
+import { BlogPage } from '@/pages/blog';
+import { BlogDetailPage } from '@/pages/blog-detail';
+import { PrivacyPage } from '@/pages/privacy';
+import { TermsPage } from '@/pages/terms';
+import NotFound from '@/pages/not-found';
 import { WORK_PROJECTS } from '@/components/work-section';
 import { BLOG_POSTS } from '@/lib/blog-data';
-
-// ponytail: route-level code splitting via standard React.lazy + Suspense (drops initial JS bundle by ~45%)
-const AboutPage = lazy(() => import('@/pages/about').then((m) => ({ default: m.AboutPage })));
-const WorkPage = lazy(() => import('@/pages/work').then((m) => ({ default: m.WorkPage })));
-const ProjectDetailPage = lazy(() => import('@/pages/project-detail').then((m) => ({ default: m.ProjectDetailPage })));
-const ServicesPage = lazy(() => import('@/pages/services').then((m) => ({ default: m.ServicesPage })));
-const ContactPage = lazy(() => import('@/pages/contact').then((m) => ({ default: m.ContactPage })));
-const CareersPage = lazy(() => import('@/pages/careers').then((m) => ({ default: m.CareersPage })));
-const BlogPage = lazy(() => import('@/pages/blog').then((m) => ({ default: m.BlogPage })));
-const BlogDetailPage = lazy(() => import('@/pages/blog-detail').then((m) => ({ default: m.BlogDetailPage })));
-const PrivacyPage = lazy(() => import('@/pages/privacy').then((m) => ({ default: m.PrivacyPage })));
-const TermsPage = lazy(() => import('@/pages/terms').then((m) => ({ default: m.TermsPage })));
-const NotFound = lazy(() => import('@/pages/not-found'));
 
 export function App() {
   const [location] = useLocation();
 
-  // ponytail: standard window scroll to top on route change (respects anchor hash if present)
+  // Scroll to top on route change (respects anchor hash if present)
   useEffect(() => {
     if (!window.location.hash) {
       window.scrollTo({ top: 0, behavior: 'instant' });
@@ -66,28 +64,26 @@ export function App() {
 
   return (
     <div className="app-shell">
-      {/* ponytail: native WCAG 2.4.1 keyboard bypass link */}
+      {/* Native WCAG 2.4.1 keyboard bypass link */}
       <a href="#main-content" className="skip-to-content">// SKIP TO MAIN CONTENT</a>
 
       <SiteHeader />
 
       <div id="main-content">
-        <Suspense fallback={<div className="route-progress-bar" role="status" aria-label="Loading page..." />}>
-          <Switch>
-            <Route path="/" component={HomePage} />
-            <Route path="/about" component={AboutPage} />
-            <Route path="/work" component={WorkPage} />
-            <Route path="/work/:id" component={ProjectDetailPage} />
-            <Route path="/services" component={ServicesPage} />
-            <Route path="/blog" component={BlogPage} />
-            <Route path="/blog/:slug" component={BlogDetailPage} />
-            <Route path="/careers" component={CareersPage} />
-            <Route path="/contact" component={ContactPage} />
-            <Route path="/privacy" component={PrivacyPage} />
-            <Route path="/terms" component={TermsPage} />
-            <Route component={NotFound} />
-          </Switch>
-        </Suspense>
+        <Switch>
+          <Route path="/" component={HomePage} />
+          <Route path="/about" component={AboutPage} />
+          <Route path="/work" component={WorkPage} />
+          <Route path="/work/:id" component={ProjectDetailPage} />
+          <Route path="/services" component={ServicesPage} />
+          <Route path="/blog" component={BlogPage} />
+          <Route path="/blog/:slug" component={BlogDetailPage} />
+          <Route path="/careers" component={CareersPage} />
+          <Route path="/contact" component={ContactPage} />
+          <Route path="/privacy" component={PrivacyPage} />
+          <Route path="/terms" component={TermsPage} />
+          <Route component={NotFound} />
+        </Switch>
       </div>
 
       <BackToTop />
