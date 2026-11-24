@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect, useRef } from 'react';
 import { Route, Switch, useLocation } from 'wouter';
 import { SiteHeader } from '@/components/site-header';
 import { BackToTop } from '@/components/back-to-top';
@@ -16,12 +16,15 @@ import { TermsPage } from '@/pages/terms';
 import NotFound from '@/pages/not-found';
 import { WORK_PROJECTS } from '@/components/work-section';
 import { BLOG_POSTS } from '@/lib/blog-data';
+import { isCommittingPageTransition } from '@/lib/page-transition';
 
 export function App() {
   const [location] = useLocation();
+  const contentRef = useRef<HTMLDivElement>(null);
+  const previousPath = useRef(location);
 
-  // Scroll after the target page has rendered so cross-page links can jump to a section.
-  useEffect(() => {
+  // Set the scroll position before the browser captures or paints the destination.
+  useLayoutEffect(() => {
     const anchorId = window.location.hash.slice(1);
     if (anchorId) {
       document.getElementById(anchorId)?.scrollIntoView({ behavior: 'instant' });
@@ -29,6 +32,22 @@ export function App() {
       window.scrollTo({ top: 0, behavior: 'instant' });
     }
 
+    const changedPage = previousPath.current !== location;
+    previousPath.current = location;
+    if (
+      !changedPage ||
+      isCommittingPageTransition() ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) return;
+
+    const transition = contentRef.current?.animate?.(
+      [{ opacity: 0.72 }, { opacity: 1 }],
+      { duration: 220, easing: 'ease-out' },
+    );
+    return () => transition?.cancel();
+  }, [location]);
+
+  useEffect(() => {
     // Normalize trailing slashes for lookup (e.g. /about/ -> /about)
     const normalizedPath = location.length > 1 && location.endsWith('/')
       ? location.slice(0, -1)
@@ -72,7 +91,7 @@ export function App() {
 
       <SiteHeader />
 
-      <div id="main-content">
+      <div id="main-content" ref={contentRef}>
         <Switch>
           <Route path="/" component={HomePage} />
           <Route path="/about" component={AboutPage} />
