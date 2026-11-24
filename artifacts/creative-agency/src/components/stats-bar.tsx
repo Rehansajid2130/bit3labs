@@ -6,10 +6,10 @@ interface StatData {
 }
 
 const STATS: StatData[] = [
-  { value: '250+', label: 'PROJECTS DELIVERED' },
+  { value: '50+', label: 'PROJECTS DELIVERED' },
   { value: '98%', label: 'CLIENT SATISFACTION' },
-  { value: '15', label: 'YEARS EXPERIENCE' },
-  { value: '50+', label: 'INDUSTRY AWARDS' },
+  { value: '5', label: 'YEARS EXPERIENCE' },
+  { value: '4', label: 'CORE SERVICES' },
 ];
 
 // ponytail: dedicated counter item with intersection animation

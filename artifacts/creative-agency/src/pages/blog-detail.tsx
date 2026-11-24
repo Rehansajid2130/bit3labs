@@ -13,7 +13,7 @@ export function BlogDetailPage() {
 
   if (!post) {
     return (
-      <main className="page-main notfound-page">
+      <main className="page-main blog-detail-page">
         <div className="page-hero-banner site-grid">
           <div className="section-wrap">
             <span className="section-kicker">// ARTICLE NOT FOUND</span>
@@ -53,19 +53,13 @@ export function BlogDetailPage() {
 
   return (
     <main className="page-main blog-detail-page">
-      {/* Top Banner Navigation */}
-      <div className="blog-detail-topbar site-grid">
+      <header className="blog-article-header site-grid">
         <div className="section-wrap">
           <Link href="/blog" className="blog-back-link">
             <ArrowLeft size={14} />
             <span>RETURN TO ALL DISPATCHES</span>
           </Link>
-        </div>
-      </div>
 
-      {/* Hero Header */}
-      <header className="blog-article-header site-grid">
-        <div className="section-wrap">
           <div className="blog-card-meta">
             <span className="blog-category-badge">// {post.category.toUpperCase()}</span>
             <span className="blog-meta-dot">•</span>

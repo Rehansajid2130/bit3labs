@@ -140,11 +140,12 @@ img {
 
 /* Architectural Grid Pattern (exact 60px grid from reference) */
 .site-grid {
+  --site-grid-cell-size: 60px;
   background-color: var(--color-bg-light);
   background-image: 
     linear-gradient(to right, var(--color-grid-line) 1px, transparent 1px),
     linear-gradient(to bottom, var(--color-grid-line) 1px, transparent 1px);
-  background-size: 60px 60px;
+  background-size: var(--site-grid-cell-size) var(--site-grid-cell-size);
 }
 
 /* Reusable Kicker & Heading Tokens */

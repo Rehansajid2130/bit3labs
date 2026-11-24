@@ -44,7 +44,7 @@ export function SiteHeader() {
       </Link>
 
       <nav className="desktop-nav" aria-label="Main navigation">
-        <Link href="/about" className={isActive('/about') ? 'nav-active' : ''} aria-current={isActive('/about') ? 'page' : undefined}>ABOUT</Link>
+        <Link href="/about" className={isActive('/about') ? 'nav-active' : ''} aria-current={isActive('/about') ? 'page' : undefined}>ABOUT US</Link>
         <Link href="/work" className={isActive('/work') ? 'nav-active' : ''} aria-current={isActive('/work') ? 'page' : undefined}>WORK</Link>
         <Link href="/services" className={isActive('/services') ? 'nav-active' : ''} aria-current={isActive('/services') ? 'page' : undefined}>SERVICES</Link>
         <Link href="/blog" className={isActive('/blog') ? 'nav-active' : ''} aria-current={isActive('/blog') ? 'page' : undefined}>BLOG</Link>
@@ -67,13 +67,13 @@ export function SiteHeader() {
 
       {mobileOpen && (
         <nav id="mobile-nav-menu" className="mobile-nav" aria-label="Mobile navigation">
-          <Link href="/about" className={isActive('/about') ? 'nav-active' : ''} aria-current={isActive('/about') ? 'page' : undefined} onClick={close}>ABOUT</Link>
+          <Link href="/about" className={isActive('/about') ? 'nav-active' : ''} aria-current={isActive('/about') ? 'page' : undefined} onClick={close}>ABOUT US</Link>
           <Link href="/work" className={isActive('/work') ? 'nav-active' : ''} aria-current={isActive('/work') ? 'page' : undefined} onClick={close}>WORK</Link>
           <Link href="/services" className={isActive('/services') ? 'nav-active' : ''} aria-current={isActive('/services') ? 'page' : undefined} onClick={close}>SERVICES</Link>
           <Link href="/blog" className={isActive('/blog') ? 'nav-active' : ''} aria-current={isActive('/blog') ? 'page' : undefined} onClick={close}>BLOG</Link>
           <Link href="/contact" className={isActive('/contact') ? 'nav-active' : ''} aria-current={isActive('/contact') ? 'page' : undefined} onClick={close}>CONTACT</Link>
         </nav>
-      )}
+      )}      
     </header>
   );
 }

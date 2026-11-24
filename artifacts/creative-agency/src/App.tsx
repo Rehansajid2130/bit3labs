@@ -33,7 +33,7 @@ export function App() {
 
     const routeTitles: Record<string, string> = {
       '/': 'bit3labs — Creative Technology Studio',
-      '/about': 'About bit3labs — Creative Powerhouse',
+      '/about': 'About Us - bit3labs',
       '/work': 'Selected Work — bit3labs',
       '/services': 'Services & Capabilities — bit3labs',
       '/blog': 'Engineering Dispatches & Journal — bit3labs',

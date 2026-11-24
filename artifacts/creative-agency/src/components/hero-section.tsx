@@ -1,5 +1,6 @@
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'wouter';
+import { HeroGridTrail } from './hero-grid-trail';
 
 export function HeroSection() {
   const disciplines = [
@@ -11,6 +12,7 @@ export function HeroSection() {
 
   return (
     <section className="hero-section site-grid" id="top">
+      <HeroGridTrail />
       {/* Floating subtle architectural geometry squares snapping to grid */}
       <div aria-hidden="true" className="hero-floating-square hero-square-1" />
       <div aria-hidden="true" className="hero-floating-square hero-square-2" />
