@@ -39,8 +39,8 @@ export function SiteHeader() {
 
   return (
     <header className="topbar">
-      <Link href="/" className="wordmark" aria-label="bit3labs home">
-        bit3labs<span className="period">.</span>
+      <Link href="/" className="wordmark" aria-label="bit3labs home" aria-current={isActive('/') ? 'page' : undefined}>
+        bit3<span className="wordmark-labs">labs</span><span className="period">.</span>
       </Link>
 
       <nav className="desktop-nav" aria-label="Main navigation">
@@ -51,7 +51,7 @@ export function SiteHeader() {
         <Link href="/contact" className={isActive('/contact') ? 'nav-active' : ''} aria-current={isActive('/contact') ? 'page' : undefined}>CONTACT</Link>
       </nav>
 
-      <Link href="/contact" className="nav-cta-btn">
+      <Link href="/contact" className="nav-cta-btn" onClick={close}>
         START PROJECT
       </Link>
 
@@ -72,7 +72,6 @@ export function SiteHeader() {
           <Link href="/services" className={isActive('/services') ? 'nav-active' : ''} aria-current={isActive('/services') ? 'page' : undefined} onClick={close}>SERVICES</Link>
           <Link href="/blog" className={isActive('/blog') ? 'nav-active' : ''} aria-current={isActive('/blog') ? 'page' : undefined} onClick={close}>BLOG</Link>
           <Link href="/contact" className={isActive('/contact') ? 'nav-active' : ''} aria-current={isActive('/contact') ? 'page' : undefined} onClick={close}>CONTACT</Link>
-          <Link href="/contact" className="mobile-cta" onClick={close}>START PROJECT</Link>
         </nav>
       )}
     </header>

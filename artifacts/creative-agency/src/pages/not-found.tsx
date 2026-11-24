@@ -14,9 +14,6 @@ export default function NotFound() {
           <h2 className="page-hero-title">
             COORDINATE NOT FOUND IN <span className="red">SYSTEM</span> ARCHIVE
           </h2>
-          <p className="page-hero-desc">
-            The requested endpoint or document cannot be located. It may have been decommissioned, migrated to a new architecture, or typed incorrectly. Use the system recovery coordinates below to re-enter bit3labs.
-          </p>
         </div>
       </div>
 

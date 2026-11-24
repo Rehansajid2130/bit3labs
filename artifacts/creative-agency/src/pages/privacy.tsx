@@ -26,9 +26,6 @@ export function PrivacyPage() {
           <h1 className="page-hero-title">
             PRIVACY <span className="red">POLICY</span>
           </h1>
-          <p className="page-hero-desc">
-            Effective Date: October 28, 2026 | Version 2.4 (Enterprise Edition). How bit3labs safeguards client data, proprietary codebases, technical specifications, and intellectual property in compliance with EU/UK GDPR, CCPA/CPRA, and SOC 2 Type II Privacy Trust Services Criteria.
-          </p>
 
           <div style={{ marginTop: '20px', display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
             <span className="legal-badge-pill">
@@ -118,6 +115,7 @@ export function PrivacyPage() {
 
           {/* Main Legal Body Flow */}
           <div className="editorial-main legal-body-flow">
+            <p className="editorial-lead">Effective Date: October 28, 2026 | Version 2.4 (Enterprise Edition).</p>
             
             {/* 01 CONTROLLER & DPO */}
             <div className="legal-block" id="section-01">

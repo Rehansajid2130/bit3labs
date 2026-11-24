@@ -25,6 +25,12 @@
   color: var(--color-text-dark);
 }
 
+.wordmark-labs {
+  color: var(--color-text-dark);
+  transition: color 220ms ease-in-out;
+}
+
+.wordmark[aria-current='page'] .wordmark-labs,
 .period {
   color: var(--color-red);
 }
@@ -103,12 +109,23 @@
   .topbar {
     padding: 0 18px;
   }
-  .desktop-nav,
-  .nav-cta-btn {
+  .desktop-nav {
     display: none;
   }
+  .nav-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin-inline-start: auto;
+    padding-inline: 12px;
+    white-space: nowrap;
+  }
   .menu-toggle {
-    display: block;
+    display: inline-grid;
+    place-items: center;
+    flex: 0 0 44px;
+    height: 44px;
+    margin-inline-start: 4px;
   }
   .mobile-nav {
     position: absolute;
@@ -149,19 +166,6 @@
   }
   .mobile-nav a.nav-active::after {
     transform: scaleX(1);
-  }
-  .mobile-nav a.mobile-cta {
-    background-color: var(--color-red);
-    color: #FFFFFF;
-    font-family: var(--font-mono);
-    padding: 12px;
-    text-align: center;
-    font-size: 15px;
-    margin-top: 8px;
-    width: 100%;
-  }
-  .mobile-nav a.mobile-cta::after {
-    display: none;
   }
 }
 

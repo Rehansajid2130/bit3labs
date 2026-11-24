@@ -29,9 +29,6 @@ export function ProjectDetailPage() {
             <h1 className="page-hero-title">
               CASE STUDY <span className="red">NOT</span> FOUND
             </h1>
-            <p className="page-hero-desc">
-              The project coordinate or case study you requested does not exist in our system archive.
-            </p>
             <div style={{ marginTop: '24px' }}>
               <Link href="/work" className="hero-explore-btn">
                 <span>RETURN TO ALL PROJECTS</span>
@@ -66,10 +63,6 @@ export function ProjectDetailPage() {
           <h1 className="page-hero-title">
             {project.title}
           </h1>
-
-          <p className="page-hero-desc">
-            {project.overview}
-          </p>
 
           {/* Meta Specifications Rail */}
           <div className="project-hero-meta-bar">
@@ -126,6 +119,7 @@ export function ProjectDetailPage() {
           </aside>
 
           <div className="editorial-main">
+            <p className="editorial-lead">{project.overview}</p>
             <div className="project-two-col-layout">
               {/* Left Column: Narrative & Deliverables */}
               <div className="project-narrative-flow">

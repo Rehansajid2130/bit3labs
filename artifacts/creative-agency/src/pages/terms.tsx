@@ -15,9 +15,6 @@ export function TermsPage() {
           <h1 className="page-hero-title">
             TERMS OF <span className="red">SERVICE</span>
           </h1>
-          <p className="page-hero-desc">
-            Last Updated: January 2025. Standard terms governing creative technology services, software delivery, and intellectual property transfers by bit3labs.
-          </p>
         </div>
       </div>
 
@@ -29,6 +26,7 @@ export function TermsPage() {
           </aside>
 
           <div className="editorial-main legal-body-flow">
+            <p className="editorial-lead">Last Updated: January 2025.</p>
             <div className="legal-block">
               <span className="story-step-num">// 01 ENGAGEMENT SCOPE</span>
               <h2 className="project-block-title">SERVICES &amp; STATEMENTS OF WORK</h2>

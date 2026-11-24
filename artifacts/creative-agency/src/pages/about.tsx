@@ -12,9 +12,6 @@ export function AboutPage() {
           <h1 className="page-hero-title">
             SHAPING BOLD VISIONS INTO <span className="red">CAPABLE</span> PRODUCTS
           </h1>
-          <p className="page-hero-desc">
-            bit3labs is an independent design technology studio. We eliminate corporate bureaucracy, focusing solely on high-impact strategy, meticulous typography, and world-class digital execution.
-          </p>
         </div>
       </div>
 

@@ -83,9 +83,6 @@ export function ContactSection() {
           <h1 className="contact-display-title">
             LET'S CREATE <span className="red">TOGETHER</span>
           </h1>
-          <p className="contact-subhead">
-            Have a project in mind? We'd absolutely love to hear from you. Let's create something truly exceptional.
-          </p>
         </div>
 
         {/* 2-Column Content */}

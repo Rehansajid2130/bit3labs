@@ -31,9 +31,6 @@ export function BlogPage() {
           <h1 className="page-hero-title">
             THE BIT3LABS <span className="red">DISPATCH</span>
           </h1>
-          <p className="page-hero-desc">
-            Deep technical teardowns, WebGL performance profiling, distributed systems architecture, and brutalist design principles direct from the studio engineering team.
-          </p>
         </div>
       </div>
 

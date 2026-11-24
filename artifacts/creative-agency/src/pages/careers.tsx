@@ -42,9 +42,6 @@ export function CareersPage() {
           <h1 className="page-hero-title">
             BUILD THE <span className="red">FUTURE</span> OF SOFTWARE WITH US
           </h1>
-          <p className="page-hero-desc">
-            bit3labs is an engineering-first creative technology studio. We eliminate corporate bureaucracy and fluff, focusing exclusively on craft, modern architectures, and tangible products for forward-thinking clients worldwide.
-          </p>
         </div>
       </div>
 

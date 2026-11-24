@@ -184,7 +184,7 @@ export function WorkSection({
         </div>
 
           {/* Bento Grid (Matching image4.png layout) */}
-          <div className="work-bento-grid">
+          <div className="work-bento-grid" data-project-count={projects.length}>
             {/* Left Column: Tall Minimal Aesthetics */}
             <div className="bento-col-left">
               {projects[0] && (

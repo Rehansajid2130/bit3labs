@@ -21,15 +21,13 @@ export function WorkPage() {
           <h1 className="page-hero-title">
             FEATURED <span className="red">PROJECTS</span> &amp; BUILDS
           </h1>
-          <p className="page-hero-desc">
-            Explore a curated selection of our custom websites, bespoke e-commerce platforms, mobile applications, and enterprise inventory systems engineered for scale.
-          </p>
 
           <div className="work-filter-bar">
             {categories.map((cat) => (
               <button
                 key={cat}
                 type="button"
+                aria-pressed={filter === cat}
                 className={`work-filter-btn ${filter === cat ? 'active' : ''}`}
                 onClick={() => setFilter(cat)}
               >

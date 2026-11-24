@@ -20,9 +20,6 @@ export function BlogDetailPage() {
             <h1 className="page-hero-title">
               DISPATCH <span className="red">NOT</span> FOUND
             </h1>
-            <p className="page-hero-desc">
-              The engineering article you are looking for does not exist in our archive.
-            </p>
             <div style={{ marginTop: '24px' }}>
               <Link href="/blog" className="hero-explore-btn">
                 <span>RETURN TO DISPATCH INDEX</span>
@@ -80,7 +77,6 @@ export function BlogDetailPage() {
           </div>
 
           <h1 className="blog-article-headline">{post.title}</h1>
-          <p className="blog-article-lead">{post.summary}</p>
 
           <div className="blog-article-byline">
             <div className="blog-author-block">

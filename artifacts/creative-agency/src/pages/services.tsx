@@ -11,9 +11,6 @@ export function ServicesPage() {
           <h1 className="page-hero-title">
             PRECISION <span className="red">DISCIPLINES</span> FOR DIGITAL EXCELLENCE
           </h1>
-          <p className="page-hero-desc">
-            From bespoke websites and 3D web experiences to custom e-commerce engines, native mobile apps, and enterprise ERP/inventory software—engineered with precision.
-          </p>
         </div>
       </div>
 
