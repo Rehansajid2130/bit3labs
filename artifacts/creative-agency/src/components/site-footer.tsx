@@ -46,11 +46,14 @@ export function SiteFooter({ hideCta = false }: SiteFooterProps) {
         )}
 
         <div className="footer-links-col">
-          <span className="footer-heading">Company</span>
-          <nav className="footer-nav" aria-label="Footer links">
+          <span className="footer-heading">Explore</span>
+          <nav className="footer-nav footer-explore-nav" aria-label="Explore bit3labs">
             <Link href="/about">About</Link>
-            <Link href="/work">Work</Link>
+            <Link href="/work">Portfolio</Link>
             <Link href="/services">Services</Link>
+            <Link href="/about#studio-process" onClick={() => document.getElementById('studio-process')?.scrollIntoView()}>
+              Process
+            </Link>
             <Link href="/blog">Blog</Link>
             <Link href="/careers">Careers</Link>
             <Link href="/contact">Contact</Link>

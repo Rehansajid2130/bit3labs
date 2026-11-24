@@ -20,9 +20,12 @@ import { BLOG_POSTS } from '@/lib/blog-data';
 export function App() {
   const [location] = useLocation();
 
-  // Scroll to top on route change (respects anchor hash if present)
+  // Scroll after the target page has rendered so cross-page links can jump to a section.
   useEffect(() => {
-    if (!window.location.hash) {
+    const anchorId = window.location.hash.slice(1);
+    if (anchorId) {
+      document.getElementById(anchorId)?.scrollIntoView({ behavior: 'instant' });
+    } else {
       window.scrollTo({ top: 0, behavior: 'instant' });
     }
 

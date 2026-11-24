@@ -51,7 +51,7 @@ export function AboutPage() {
         </div>
       </section>
 
-      <section className="editorial-section about-process">
+      <section className="editorial-section about-process" id="studio-process">
         <div className="section-wrap">
           <h2 className="section-title">How our team works together</h2>
           <ol className="about-process-grid" role="list">

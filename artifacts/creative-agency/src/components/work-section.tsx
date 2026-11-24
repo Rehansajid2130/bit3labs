@@ -1,5 +1,6 @@
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { Link } from 'wouter';
+import type { WorkCategory } from '@/lib/work-categories';
 
 export interface ProjectMetric {
   label: string;
@@ -148,21 +149,15 @@ export const WORK_PROJECTS: WorkProject[] = [
 
 export function WorkSection({
   showAll = false,
-  filter = 'ALL',
+  categories = [],
 }: {
   showAll?: boolean;
-  filter?: string;
+  categories?: WorkCategory[];
 }) {
   const allProjects = showAll ? WORK_PROJECTS : WORK_PROJECTS.slice(0, 6);
-  const projects = allProjects.filter((item) => {
-    if (!filter || filter === 'ALL') return true;
-    if (filter === 'WEB DEV & 3D') return item.category.includes('Web') || item.category.includes('3D');
-    if (filter === 'CUSTOM E-COMMERCE') return item.category.includes('Commerce');
-    if (filter === 'MOBILE APPS') return item.category.includes('Mobile');
-    if (filter === 'ERP & INVENTORY') return item.category.includes('ERP') || item.category.includes('Inventory');
-    if (filter === 'PERSONAL SITES') return item.category.includes('Personal');
-    return item.category.toUpperCase() === filter.toUpperCase();
-  });
+  const projects = categories.length === 0 ? allProjects : allProjects.filter((project) =>
+    categories.some(({ keywords }) => keywords.some((keyword) => project.category.includes(keyword))),
+  );
 
   return (
     <section className="editorial-section work-section" id="work">

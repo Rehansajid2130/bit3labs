@@ -436,30 +436,6 @@
   }
 }
 
-.about-media-wrap {
-  position: relative;
-  width: min(100%, 640px);
-  overflow: hidden;
-  aspect-ratio: 2 / 1;
-  background-color: var(--color-border);
-  border: 1px solid var(--color-border);
-}
-
-.about-studio-img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: contrast(0.96) grayscale(0.15);
-}
-
-@media (max-width: 640px) {
-  .about-media-wrap {
-    aspect-ratio: 16 / 9;
-  }
-}
-
 /* ==========================================================================
    SELECTED WORK SECTION (Bento Grid)
    ========================================================================== */
@@ -675,6 +651,9 @@
 }
 
 .service-editorial-row {
+  --service-number-color: var(--color-text-muted);
+  --service-description-color: var(--color-text-muted);
+  --service-bullet-color: var(--color-text-dark);
   width: 100%;
   padding-block: 48px;
   border-bottom: 1px solid var(--color-border);
@@ -685,10 +664,24 @@
   color: var(--color-text-dark);
 }
 
-.service-row-inverted {
+.service-row-inverted,
+.service-row-link:is(:hover, :focus-visible) {
+  --service-number-color: rgba(255, 255, 255, 0.6);
+  --service-description-color: rgba(255, 255, 255, 0.7);
+  --service-bullet-color: rgba(255, 255, 255, 0.9);
   background-color: var(--color-bg-dark);
   color: #FFFFFF;
-  border-bottom: 1px solid #222;
+  border-bottom-color: #222;
+}
+
+.service-row-link {
+  display: block;
+  transition: background-color 180ms ease, border-color 180ms ease;
+}
+
+.service-row-link:focus-visible {
+  outline: 2px solid var(--color-red);
+  outline-offset: -2px;
 }
 
 .service-row-grid {
@@ -703,11 +696,7 @@
   font-size: 16px;
   font-weight: 600;
   letter-spacing: 0.03em;
-  color: var(--color-text-muted);
-}
-
-.service-row-inverted .service-row-num {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--service-number-color);
 }
 
 .service-row-main {
@@ -730,11 +719,7 @@
   font-size: 14px;
   line-height: 1.6;
   max-width: 580px;
-  color: var(--color-text-muted);
-}
-
-.service-row-inverted .service-row-desc {
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--service-description-color);
 }
 
 .service-row-deliverables {
@@ -763,11 +748,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--color-text-dark);
-}
-
-.service-row-inverted .service-bullet-text {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--service-bullet-color);
 }
 
 @media (max-width: 900px) {

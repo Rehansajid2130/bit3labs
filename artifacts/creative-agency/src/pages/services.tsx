@@ -16,7 +16,7 @@ export function ServicesPage() {
         </div>
       </div>
 
-      <ServicesSection />
+      <ServicesSection linkProjects />
 
       <section className="editorial-section">
         <div className="section-wrap service-delivery-layout">

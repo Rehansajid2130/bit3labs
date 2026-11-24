@@ -97,7 +97,6 @@ export function ProjectDetailPage() {
           </aside>
 
           <div className="editorial-main">
-            {/* Primary Controlled Frame - Standard 440px height matching about-media-wrap */}
             <div className="project-media-frame">
               <img
                 src={project.image}
